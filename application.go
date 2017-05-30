@@ -8,13 +8,16 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		num, _ := strconv.Atoi(r.FormValue("num"))
-		fmt.Fprintf(w, "Hello, %d is %s", num, size(num))
-	})
+	http.HandleFunc("/", indexHandler)
 
 	log.Println("Listening on port 5000...")
 	log.Fatal(http.ListenAndServe(":5000", nil))
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("%v", r.Form)
+	num, _ := strconv.Atoi(r.FormValue("num"))
+	fmt.Fprintf(w, "%d is %s", num, size(num))
 }
 
 func size(a int) string {
