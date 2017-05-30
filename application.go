@@ -15,7 +15,6 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%v", r.Form)
 	num, _ := strconv.Atoi(r.FormValue("num"))
 	fmt.Fprintf(w, "%d is %s", num, size(num))
 }

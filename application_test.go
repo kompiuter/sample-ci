@@ -3,18 +3,17 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
-	"net/url"
-	"strings"
 	"testing"
 )
 
 func TestIndexHandler(t *testing.T) {
-	form := url.Values{}
-	form.Add("num", "5")
-	req, err := http.NewRequest("GET", "/", strings.NewReader(form.Encode()))
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
+	q := req.URL.Query()
+	q.Add("num", "5")
+	req.URL.RawQuery = q.Encode()
 
 	rw := httptest.NewRecorder()
 	handler := http.HandlerFunc(indexHandler)
