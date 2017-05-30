@@ -2,13 +2,9 @@ language: go
 go:
   - 1.8.3
 
-env:
-  global:
-    - PATH=$HOME/gopath/bin:$PATH
-
-install:
-  - go get code.google.com/p/go.tools/cmd/cover github.com/mattn/goveralls github.com/modocache/gover
-
+go:
+  - tip
+before_install:
+  - go get github.com/mattn/goveralls
 script:
-  - go test -coverprofile=.coverprofile .
-  - goveralls -coverprofile=.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
+  - $HOME/gopath/bin/goveralls -service=travis-ci
