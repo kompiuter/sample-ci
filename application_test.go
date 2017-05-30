@@ -11,6 +11,7 @@ func TestIndexHandler(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	q := req.URL.Query()
 	q.Add("num", "5")
 	req.URL.RawQuery = q.Encode()
